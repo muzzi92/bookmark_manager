@@ -4,6 +4,7 @@
 
 <% @bookmarks.each do |bookmark| %>
   <a href= <%= bookmark.url %>><%= bookmark.title %><br> </a>
+  <input type='submit' value = 'Comment'>
 <%end%>
 
 </ul>

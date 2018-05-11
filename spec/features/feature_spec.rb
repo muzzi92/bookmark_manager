@@ -54,4 +54,17 @@ feature BookmarkManager do
     end
   end
 
+  # feature 'Commenting on bookmarks' do
+  #   scenario 'Comment is added to comments table' do
+  #     visit_and_add_bookmark
+  #     click_button 'Comment'
+  #     fill_in 'comment', with: 'p everywhere'
+  #     click_button 'Submit'
+  #     expect(page).to have_content 'p everywhere'
+  #
+  #     end
+  #   end
+
+
+
 end
