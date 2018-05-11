@@ -1,21 +1,23 @@
 require 'pg'
 
 class Bookmark
-  attr_reader :title, :url
+  attr_reader :title, :url, :id
 
-  def initialize(title, url)
+  def initialize(title, url, id)
     @title = title
     @url = url
   end
 
   def self.all
     result = choose_database.exec("SELECT * FROM bookmarks")
-    result.map { |bookmark| Bookmark.new(bookmark['title'], bookmark['url']) }
+    result.map { |bookmark| Bookmark.new(bookmark['title'], bookmark['url'], bookmark['id']) }
   end
 
   def self.create(title, url)
     if  url =~ URI::regexp
       choose_database.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}', '#{title}');")
+      result = choose_database.exec("SELECT * FROM bookmarks")
+      result.map { |bookmark| Bookmark.new(bookmark['title'], bookmark['url'], bookmark['id']) }
     else
       false
     end

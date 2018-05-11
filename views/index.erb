@@ -4,10 +4,17 @@
 
 <% @bookmarks.each do |bookmark| %>
   <a href= <%= bookmark.url %>><%= bookmark.title %><br> </a>
-  <input type='submit' value = 'Comment'>
-<%end%>
+  <form action='/added_comment' method='post'>
+    <input type='text' name='comment'>
+    <input type='submit' value = 'Submit Comment'>
+  </form>
+    <%end%>
 
 </ul>
+
+<% @comments.each do |comment| %>
+  <%= comment.text %>
+  <% end %>
 
 <form action="/add_bookmark" method="get">
   <input type="submit" value="Add bookmark">

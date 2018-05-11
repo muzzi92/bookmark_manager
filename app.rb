@@ -3,6 +3,7 @@ require 'sinatra/flash'
 require './lib/bookmark'
 require 'uri'
 require 'sinatra'
+require_relative './lib/comment'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions
@@ -10,6 +11,7 @@ class BookmarkManager < Sinatra::Base
 
   get '/' do
     @bookmarks = Bookmark.all
+    @comments = Comment.all
     erb(:index)
   end
 
@@ -36,6 +38,11 @@ class BookmarkManager < Sinatra::Base
 
   post '/updated_bookmark' do
     Bookmark.update(params[:Name], params[:New_name])
+    redirect('/')
+  end
+
+  post '/added_comment' do
+    Comment.create(params[:comment])
     redirect('/')
   end
 
